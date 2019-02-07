@@ -16,7 +16,7 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-"""
+
 from airflow import DAG
 from airflow.operators import BashOperator
 from datetime import datetime, timedelta
@@ -34,7 +34,9 @@ default_args = {
 }
 
 dag = DAG(
-    'docker_sample', default_args=default_args, schedule_interval=timedelta(minutes=10))
+    dag_id='example_docker_operator', 
+    default_args=default_args, 
+    schedule_interval=None)
 
 t1 = BashOperator(
     task_id='print_date',
@@ -65,4 +67,3 @@ t4 = BashOperator(
 t1.set_downstream(t2)
 t1.set_downstream(t3)
 t3.set_downstream(t4)
-"""
